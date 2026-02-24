@@ -29,23 +29,23 @@ const transactions = [
   }
 ];
 
-// ===============================
+
 // 1. Уникальные типы транзакций
-// ===============================
+
 function getUniqueTransactionTypes(transactions) {
   return [...new Set(transactions.map(t => t.transaction_type))];
 }
 
-// ===============================
+
 // 2. Общая сумма транзакций
-// ===============================
+
 function calculateTotalAmount(transactions) {
   return transactions.reduce((sum, t) => sum + t.transaction_amount, 0);
 }
 
-// ===============================
+
 // 3. Сумма по дате (extra)
-// ===============================
+
 function calculateTotalAmountByDate(transactions, year, month, day) {
   return transactions
     .filter(t => {
@@ -58,16 +58,16 @@ function calculateTotalAmountByDate(transactions, year, month, day) {
     .reduce((sum, t) => sum + t.transaction_amount, 0);
 }
 
-// ===============================
+
 // 4. По типу транзакции
-// ===============================
+
 function getTransactionByType(transactions, type) {
   return transactions.filter(t => t.transaction_type === type);
 }
 
-// ===============================
+
 // 5. Диапазон дат
-// ===============================
+
 function getTransactionsInDateRange(transactions, startDate, endDate) {
   return transactions.filter(t => {
     const date = new Date(t.transaction_date);
@@ -76,27 +76,27 @@ function getTransactionsInDateRange(transactions, startDate, endDate) {
   });
 }
 
-// ===============================
+
 // 6. По merchant name
-// ===============================
+
 function getTransactionsByMerchant(transactions, merchantName) {
   return transactions.filter(t =>
     t.merchant_name === merchantName
   );
 }
 
-// ===============================
+
 // 7. Средняя сумма
-// ===============================
+
 function calculateAverageTransactionAmount(transactions) {
   if (transactions.length === 0) return 0;
 
   return calculateTotalAmount(transactions) / transactions.length;
 }
 
-// ===============================
+
 // 8. Диапазон суммы
-// ===============================
+
 function getTransactionsByAmountRange(transactions, minAmount, maxAmount) {
   return transactions.filter(t =>
     t.transaction_amount >= minAmount &&
@@ -104,18 +104,18 @@ function getTransactionsByAmountRange(transactions, minAmount, maxAmount) {
   );
 }
 
-// ===============================
+
 // 9. Общая сумма debit
-// ===============================
+
 function calculateTotalDebitAmount(transactions) {
   return transactions
     .filter(t => t.transaction_type === "debit")
     .reduce((sum, t) => sum + t.transaction_amount, 0);
 }
 
-// ===============================
+
 // 10. Месяц с максимум транзакций
-// ===============================
+
 function findMostTransactionsMonth(transactions) {
   if (transactions.length === 0) return null;
 
@@ -131,9 +131,9 @@ function findMostTransactionsMonth(transactions) {
   );
 }
 
-// ===============================
+
 // 11. Месяц с максимум debit
-// ===============================
+
 function findMostDebitTransactionMonth(transactions) {
   if (transactions.length === 0) return null;
 
@@ -151,9 +151,9 @@ function findMostDebitTransactionMonth(transactions) {
   );
 }
 
-// ===============================
+
 // 12. Каких транзакций больше
-// ===============================
+
 function mostTransactionTypes(transactions) {
   const debit = transactions.filter(t => t.transaction_type === "debit").length;
   const credit = transactions.filter(t => t.transaction_type === "credit").length;
@@ -163,32 +163,32 @@ function mostTransactionTypes(transactions) {
   return "equal";
 }
 
-// ===============================
+
 // 13. До указанной даты
-// ===============================
+
 function getTransactionsBeforeDate(transactions, date) {
   return transactions.filter(t =>
     new Date(t.transaction_date) < new Date(date)
   );
 }
 
-// ===============================
+
 // 14. По ID
-// ===============================
+
 function findTransactionById(transactions, id) {
   return transactions.find(t => t.transaction_id === id);
 }
 
-// ===============================
+
 // 15. Только описания
-// ===============================
+
 function mapTransactionDescriptions(transactions) {
   return transactions.map(t => t.transaction_description);
 }
 
-// ===============================
+
 // Тестирование
-// ===============================
+
 
 console.log("Unique types:", getUniqueTransactionTypes(transactions));
 console.log("Total amount:", calculateTotalAmount(transactions));
